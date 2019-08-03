@@ -1,14 +1,41 @@
-Console.WriteLine - враховує перенос на настувну строчку
-Console.Write - не враховує перенос на настувну строчку
+Console.WriteLine() - враховує перенос на настувну строчку
+Console.Write() - не враховує перенос на настувну строчку
+Console.ReadLine() - можна отримати дані з консоля коли ми щось вводимо
 
 string hello = "Привет мир";
 Console.WriteLine(hello);
 
 Інтерполяція: $"Hello {name}"
-
     string name = "Tom";
     int age = 34;
     double height = 1.7;
     Console.WriteLine($"Имя: {name}  Возраст: {age}  Рост: {height}м");
     or
     Console.WriteLine("Имя: {0}  Возраст: {2}  Рост: {1}м", name, height, age);
+
+
+Console.ReadLine(): по замовчуванню дані приходять з типом string
+    
+    Console.Write("Введите свое имя: ");
+    string name = Console.ReadLine();
+    Console.WriteLine($"Привет {name}");
+
+    Зміна типу:
+        - Convert.ToInt32() (преобразует к типу int)
+        - Convert.ToDouble() (преобразует к типу double)
+        - Convert.ToDecimal() (преобразует к типу decimal)
+
+        Console.Write("Введите имя: ");
+        string name = Console.ReadLine();
+
+        Console.Write("Введите возраст: ");
+        int age = Convert.ToInt32(Console.ReadLine());
+
+        Console.Write("Введите рост: ");
+        double height = Convert.ToDouble(Console.ReadLine());
+
+        Console.Write("Введите размер зарплаты: ");
+        decimal salary = Convert.ToDecimal(Console.ReadLine());
+
+        Console.WriteLine($"Имя: {name}  Возраст: {age}  Рост: {height}м  Зарплата: {salary}$");
+ 
