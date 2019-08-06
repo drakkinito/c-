@@ -1,0 +1,91 @@
+Описанием объекта является класс, а объект представляет экземпляр этого класса.
+
+ class Person
+    {
+        public string Name;
+        public int Age;
+        public void Getinfo()
+        {
+            Console.WriteLine($"Name: {Name}, Age: {Age}");
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Person tom = new Person(); // створення обєкта типу Person, new виділяє память для объекта Person
+            И затем вызывается конструктор по умолчанию, который не принимает никаких параметров.
+            В итоге после выполнения данного выражения в памяти будет выделен участок, где будут храниться все данные объекта Person.
+            А переменная tom получит ссылку на созданный объект.
+
+            tom.Name = "Dima";
+            tom.Age = 12;
+            tom.Getinfo();
+        }
+
+            
+    }
+
+    Создание конструкторов: Выше для инициализации объекта использовался конструктор по умолчанию. Однако мы сами можем определить свои конструкторы:
+
+    class Person
+    {
+        public string name;
+        public int age;
+    
+        public Person() { name = "Неизвестно"; age = 18; }      // 1 конструктор
+        
+        public Person(string n) { name = n; age = 18; }         // 2 конструктор
+        
+        public Person(string n, int a) { name = n; age = a; }   // 3 конструктор
+        
+        public void GetInfo()
+        {
+            Console.WriteLine($"Имя: {name}  Возраст: {age}");
+        }
+    }
+
+    static void Main(string[] args)
+    {
+        Person tom = new Person();          // вызов 1-ого конструктора без параметров
+        Person bob = new Person("Bob");     //вызов 2-ого конструктора с одним параметром
+        Person sam = new Person("Sam", 25); // вызов 3-его конструктора с двумя параметрами
+        
+        
+        bob.GetInfo();          // Имя: Bob  Возраст: 18
+        tom.GetInfo();          // Имя: Неизвестно  Возраст: 18
+        sam.GetInfo();          // Имя: Sam  Возраст: 25
+    
+        Console.ReadKey();
+    }
+
+    Ключевое слово this:
+    Ключевое слово this представляет ссылку на текущий экземпляр класса. В каких ситуациях оно нам может пригодиться? В примере выше определены три конструктора. 
+    Все три конструктора выполняют однотипные действия - устанавливают значения полей name и age. Но этих повторяющихся действий могло быть больше. 
+    И мы можем не дублировать функциональность конструкторов, а просто обращаться из одного конструктора к другому через ключевое слово this, 
+    передавая нужные значения для параметров:
+    class Person
+    {
+        public string name;
+        public int age;
+    
+        public Person() : this("Неизвестно")
+        {
+        }
+        public Person(string name) : this(name, 18)
+        {
+        }
+        public Person(string name, int age)
+        {
+            this.name = name;
+            this.age = age;
+        }
+        public void GetInfo()
+        {
+            Console.WriteLine($"Имя: {name}  Возраст: {age}");
+        }
+    }
+
+    Инициализаторы объектов:
+    Person tom = new Person { name = "Tom", age=31 };
+    tom.GetInfo();          // Имя: Tom  Возраст: 31

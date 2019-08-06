@@ -11,3 +11,75 @@ c#
             int a = 10;
             ++a; // 11, a = 1 + a;
         
+
+Методи
+    Не обовязкові параметри 
+
+    static int OptionalParam(int x, int y, int z=5, int s=4) // можна задавати дефолтні
+    {
+        return x + y + z + s;
+    }
+
+    Передача параметров по ссылке и модификатор ref - передаче параметра по ссылке метод получает адрес переменной в памяти а не ее копию
+    static void Main(string[] args)
+    {
+        int x = 10;
+        int y = 15;
+        Addition(ref x, y); // вызов метода
+        Console.WriteLine(x);   // 25
+    
+        Console.ReadLine();
+    }
+    // параметр x передается по ссылке
+    static void Addition(ref int x, int y)
+    {
+        x += y;
+    }
+
+    Модификатор out - Чтобы сделать параметр выходным, перед ним ставится модификатор out: повертає результат з метода як return
+    Прелесть использования подобных параметров состоит в том, что по сути мы можем вернуть из метода не один вариант, а несколько. 
+    
+    static void Main(string[] args)
+    {
+        int x = 10;
+        
+        int z;
+        
+        Sum(x, 15, out z);
+        
+        Console.WriteLine(z);
+    
+        Console.ReadKey();
+    }
+    static void Sum(int x, int y, out int a)
+    {
+        Console.WriteLine(x+y);
+    }
+
+
+    Params - можем передавать неопределенное количество параметров.
+    static void Addition(params int[] integers)
+    {
+        int result = 0;
+        for (int i = 0; i < integers.Length; i++)
+        {
+            result += integers[i];
+        }
+        Console.WriteLine(result);
+    }
+     
+    static void Main(string[] args)
+    {
+        Addition(1, 2, 3, 4, 5);
+         
+        int[] array = new int[] { 1, 2, 3, 4 };
+        Addition(array);
+     
+        Addition();
+        Console.ReadLine();
+    }
+
+    Если же нам надо передать какие- то другие параметры, то они должны указываться до параметра с ключевм словом params:
+    static void Addition( int x, string mes, params int[] integers)
+    {}
+    Addition(2, "hello", 1, 3, 4);
